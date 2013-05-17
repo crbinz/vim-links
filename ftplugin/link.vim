@@ -24,8 +24,8 @@ if !exists("*LinkForward")
 					execute "silent !start explorer.exe ".fn
 				elseif (match(fn,".pdf") != -1)
 					execute "silent !start explorer.exe ".fn
-				else " if unmatched, try editing as a text file, in a new tab
-					execute "tabe ".fn
+				else " if unmatched, try editing as a text file
+					execute "e ".fn
 				endif
 
 				" clear the variables here
