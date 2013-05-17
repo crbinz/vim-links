@@ -41,11 +41,18 @@ endif
 " function to facilitate link creation
 if !exists("*CreateLink")
 	function! CreateLink()
-		let link = input("Enter link: ")
-		if (strlen(link) != 0)
-			let text = input("Enter display text: ")
-			execute ":normal a [[".link."|".text."]] "
-		endif
+		"let link = input("Enter link: ")
+		"if (strlen(link) != 0)
+		"	let text = input("Enter display text: ")
+		"	execute ":normal a [[".link."|".text."]] "
+		"endif
+		"
+		"create brackets for linking
+		normal a [[]]
+
+		" get inside and start typing
+		normal hh % 
+		startinsert
 	endfunction
 endif
 
