@@ -38,7 +38,7 @@ if !exists("*LinkForward")
 		endfunction
 endif
 
-nnoremap <cr> :call LinkForward()<cr>
+nnoremap <c-cr> :call LinkForward()<cr>
 
 " commented out... just use Ctrl+o
 "if !exists("*LinkBackward")
