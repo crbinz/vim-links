@@ -38,7 +38,19 @@ if !exists("*LinkForward")
 		endfunction
 endif
 
+" function to facilitate link creation
+if !exists("*CreateLink")
+	function! CreateLink()
+		let link = input("Enter link: ")
+		if (strlen(link) != 0)
+			let text = input("Enter display text: ")
+			execute ":normal a [[".link."|".text."]] "
+		endif
+	endfunction
+endif
+
 nnoremap <c-cr> :call LinkForward()<cr>
+nnoremap <leader>l :call CreateLink()<cr>
 
 " commented out... just use Ctrl+o
 "if !exists("*LinkBackward")
