@@ -29,8 +29,16 @@ if !exists("*LinkForward")
 				elseif (match(fn,"#") != -1)
 					" this is a file with an "anchor",
 					" i.e. a mark to follow
+					" split into the file name and the
+					" mark
+					let mn = substitute(fn,".*#","","")	" mark only
+					let fn = substitute(fn,"#.*","","")	" file name only
+					
+					echo mn
+					echo fn
 
 					execute "e ".fn
+					execute "'".mn
 					
 				else " if unmatched, try editing as a text file
 					execute "e ".fn
@@ -48,24 +56,31 @@ endif
 
 " function to facilitate link creation
 if !exists("*CreateLink")
-	function! CreateLink()
-		"let link = input("Enter link: ")
-		"if (strlen(link) != 0)
-		"	let text = input("Enter display text: ")
-		"	execute ":normal a [[".link."|".text."]] "
-		"endif
-		"
-		"create brackets for linking
-		normal a [[]]
+	function! CreateLink(in)
+		"do it with prompts
+		let link = input("Enter link: ")
+		if (strlen(link) != 0)
+			let text = input("Enter display text: ")
+			execute ":normal a [[".link."|".text."]] "
+		endif
 
-		" get inside and start typing
-		normal hh % 
-		startinsert
+		if a:in == "1"
+			startinsert
+		endif
+		"
+		"create brackets for linking, along with a guide
+		"normal a [[<file or URL>{#<mark>}|<link text>]]
+
+		" move over one bracket, select inside
+		"normal hvi[
+
 	endfunction
 endif
 
+" mappings
 nnoremap <c-cr> :call LinkForward()<cr>
-nnoremap <leader>l :call CreateLink()<cr>
+nnoremap <localleader>l :call CreateLink(0)<cr>
+inoremap <localleader>l ~<esc>x:call CreateLink(1)<cr>
 
 " commented out... just use Ctrl+o
 "if !exists("*LinkBackward")
