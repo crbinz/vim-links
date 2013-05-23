@@ -21,9 +21,17 @@ if !exists("*LinkForward")
 				if (strlen(fn) == 0)
 				" do nothing
 				elseif (match(fn,"http") == 0)
+					let fn = substitute(fn,"#","\\\\#","")	" escape hash
+					let fn = substitute(fn,"%","\\\\%","")	" escape percent
 					execute "silent !start explorer.exe ".fn
 				elseif (match(fn,".pdf") != -1)
 					execute "silent !start explorer.exe ".fn
+				elseif (match(fn,"#") != -1)
+					" this is a file with an "anchor",
+					" i.e. a mark to follow
+
+					execute "e ".fn
+					
 				else " if unmatched, try editing as a text file
 					execute "e ".fn
 				endif
