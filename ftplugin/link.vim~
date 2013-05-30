@@ -61,7 +61,7 @@ if !exists("*CreateLink")
 		let link = input("Enter link: ")
 		if (strlen(link) != 0)
 			let text = input("Enter display text: ")
-			execute ":normal a[[".link."|".text."]] "
+			execute ":normal a [[".link."|".text."]] "
 		endif
 
 		if a:in == "1"
