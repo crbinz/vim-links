@@ -1,6 +1,4 @@
 " added by C Binz
-" trying to get support for linking similar to vimwiki
-" credit user "Kent" on StackOverflow
 "TODO:  Implement syntax concealment - DONE
 "	Check whether word under cursor is a link or not	
 
@@ -17,15 +15,22 @@ if !exists("*LinkForward")
 				let fn = substitute(fnr,"\|.*","","")
 				echo fnr
 
+				" check for OS, construct commands accordingly
+				if has("win32") || has("win64")
+					let cmd = "silent !start explorer.exe "
+				elseif has("mac")
+					let cmd = "silent !open "
+				endif
+
 				" different rules for different filetypes - URLs and PDFs
 				if (strlen(fn) == 0)
 				" do nothing
 				elseif (match(fn,"http") == 0)
 					let fn = substitute(fn,"#","\\\\#","")	" escape hash
 					let fn = substitute(fn,"%","\\\\%","")	" escape percent
-					execute "silent !start explorer.exe ".fn
+					execute cmd.fn
 				elseif (match(fn,".pdf") != -1)
-					execute "silent !start explorer.exe ".fn
+					execute cmd.fn
 				elseif (match(fn,"#") != -1)
 					" this is a file with an "anchor",
 					" i.e. a mark to follow
