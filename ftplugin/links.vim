@@ -71,7 +71,7 @@ endif
 
     "if a:in == "1"
       "startinsert
-    endif
+    "endif
     "
     "create brackets for linking, along with a guide
     "normal a [[<file or URL>{#<mark>}|<link text>]]
