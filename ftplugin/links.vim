@@ -91,8 +91,9 @@ endif
 
 
 " mappings
-nnoremap <CR> :call LinkForward()<cr>
-vnoremap <silent> <C-l> :call CreateLink()<cr>
+nnoremap <cr> :call LinkForward()<cr>
+" surround visually selected text with link brackets
+vnoremap <silent> <C-l> <esc>`<i[[<esc>`>a]]<esc>
 "inoremap <localleader>l ~<esc>x:call CreateLink(1)<cr>
 
 " commented out... just use Ctrl+o
