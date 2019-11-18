@@ -144,10 +144,14 @@ function! nvlinks#open_link(cmd, link, ...)
       let note_ext = get(g:, 'nvlinks_note_ext', '.md')
     endif
 
+    if !match(lnk, '\.'. note_ext . '$')
+      lnk = lnk . note_ext
+    endif
+
     if notes[-1] ==# '/'
-      let lnk = notes . lnk . note_ext
+      let lnk = notes . lnk
     else
-      let lnk = notes . '/' . lnk . note_ext
+      let lnk = notes . '/' . lnk
     endif
 
     " Escape the path first in case there are any weird characters
