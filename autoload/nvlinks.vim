@@ -5,7 +5,7 @@ function! nvlinks#check_for_notes_dir()
     return g:nv_main_directory
   elseif exists('g:nv_search_paths')
     for path in g:nv_search_paths
-      if isdirectory(path)
+      if isdirectory(expand(path))
         return path
       endif
     endfor
