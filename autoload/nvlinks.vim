@@ -118,7 +118,7 @@ function! nvlinks#matchstr_at_cursor()
     endif
   endwh
 
-  if egeg >= 0
+  if ebeg >= 0
     return strpart(line, ebeg, elen)
   else
     return ""
