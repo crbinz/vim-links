@@ -162,6 +162,6 @@ function! nvlinks#open_link(cmd, link, ...)
     endif
   endif
 
-  execute cmd . lnk
+  execute a:cmd . lnk
 endfunction
 
